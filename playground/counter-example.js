@@ -6,7 +6,22 @@ class Counter extends React.Component {
 		this.reset = this.reset.bind(this);
 
 		this.state = {
-			count: props.count
+			count: 0
+		}
+	}
+
+	componentDidMount() {
+		const stringCount = localStorage.getItem('count');
+		const count = parseInt(stringCount, 10);
+
+		if (!isNaN(count)) {
+			this.setState(() => ({count }));
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if(prevState.options !== this.state.count) {
+			localStorage.setItem('count', this.state.count);			
 		}
 	}
 
@@ -17,7 +32,6 @@ class Counter extends React.Component {
 				count: prevState.count + 1
 			};
 		});
-		console.log('Add One');
 	}
 
 	removeOne() {
@@ -26,20 +40,18 @@ class Counter extends React.Component {
 				count: prevState.count - 1
 			};
 		});
-		console.log('removeOne');
 	}
 
 	reset() {
 		this.setState({
 				count: 0
 		});
-		this.setState((prevState) => {
-			// It's just changing these specific properties of state, not overriding the whole state object.
-			return {
-				count: prevState.count + 1
-			};
-		});
-		console.log('reset');
+		// this.setState((prevState) => {
+		// 	// It's just changing these specific properties of state, not overriding the whole state object.
+		// 	return {
+		// 		count: prevState.count + 1
+		// 	};
+		// });
 	}
 
 	render() {
@@ -54,10 +66,10 @@ class Counter extends React.Component {
 	}
 }
 
-Counter.defaultProps = {
-	count: 100
-};
-ReactDOM.render(<Counter count={-10}/>, document.getElementById('app'));
+// Counter.defaultProps = {
+// 	count: 100
+// };
+ReactDOM.render(<Counter />, document.getElementById('app'));
 
 
 
