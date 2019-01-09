@@ -36,32 +36,3 @@ class VisibilityToggle extends React.Component {
 }
 
 ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
-
-// let visibility = true;
-
-// const toggleVisibility = () => {
-// 	visibility = !visibility;
-// 	render();
-// };
-
-// const appRoot = document.getElementById('app');
-
-// const render = () => {
-// 	const template = (
-// 		<div>
-// 			<h1>Visibility Test</h1>
-// 			<button onClick={toggleVisibility}>{visibility ? 'Hide Details' : 'Show Details'}</button>
-// 			{visibility && (
-// 				<div>
-// 					<p>
-// 						Now you can see the details!
-// 					</p>
-// 				</div>	
-// 			)}
-// 		</div>
-// 	);
-
-// 	ReactDOM.render(template, appRoot);
-// };
-
-// render();
