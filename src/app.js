@@ -1,11 +1,16 @@
-import subtraction, { square, add } from './utils.js'
-import isSeniorCitizen, { isAdult, canDrink} from './person.js'
+// install -> import -> use
+import React from 'react';
+import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp';
 
-console.log('App.js is running!');
+// stateless functional Component
+// const User = (props) => {
+// 	return (
+// 		<div>
+// 			<p>Name: {props.name}</p>
+// 			<p>Age: {props.age}</p>
+// 		</div>
+// 	);
+// };
 
-console.log(square(3));
-console.log(add(3,4));
-console.log(subtraction(4,3)); // with default naming is not necessary to be same. 
-console.log(isAdult(19));
-console.log(canDrink(23));
-console.log(isSeniorCitizen(65));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
