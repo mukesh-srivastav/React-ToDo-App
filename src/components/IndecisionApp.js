@@ -3,22 +3,28 @@ import AddOptions from './AddOption';
 import Options from './Options';
 import Header from './Header';
 import Action from './Action';
+import OptionModal from './OptionModal';
 
 class IndecisionApp extends React.Component {
 	
 	state = {
-			options: []
+			options: [],
+			selectedOption: undefined
 	};
 
 	handleDeleteOptions = () => {
 		this.setState(() => ({options: []}));
-	}
+	};
+
+	handleClearSelectedOption = () => {
+		this.setState(() => ({ selectedOption:undefined }));
+	};
 
 	handlePick = () => {
 		const randomNum = Math.floor(Math.random()*this.state.options.length);
 		const option = this.state.options[randomNum];
-		alert(option);
-	}
+		this.setState(() => ({ selectedOption:option }));
+	};
 
 
 	handleAddOption = (option) => {
@@ -30,13 +36,13 @@ class IndecisionApp extends React.Component {
 		}
 
 		this.setState((prevState) => ({options: prevState.options.concat(option)}));
-	}
+	};
 
 	handleDeleteOption = (optionToRemove) => {
 		this.setState((prevState)=>({
 			options: prevState.options.filter((option) => option !== optionToRemove)
 		}));
-	}
+	};
 
 	//Life cycle methods. only accessible to class based components
 
@@ -72,17 +78,25 @@ class IndecisionApp extends React.Component {
 		return (
 			<div>
 				<Header subtitle={subtitle}/>
-				<Action 
+				<div className="container">
+					<Action 
 					hasOptions={this.state.options.length > 0}
 					handlePick = {this.handlePick}
-				/>
-				<Options 
-					options={this.state.options}
-					handleDeleteOptions={this.handleDeleteOptions}
-					handleDeleteOption={this.handleDeleteOption}
-				/>
-				<AddOptions
-					handleAddOption={this.handleAddOption}
+					/>
+					<div className="widget">
+						<Options 
+							options={this.state.options}
+							handleDeleteOptions={this.handleDeleteOptions}
+							handleDeleteOption={this.handleDeleteOption}
+						/>
+						<AddOptions
+							handleAddOption={this.handleAddOption}
+						/>
+					</div>
+				</div>
+				<OptionModal 
+					selectedOption={this.state.selectedOption}
+					handleClearSelectedOption={this.handleClearSelectedOption}
 				/>
 			</div>
 		);
